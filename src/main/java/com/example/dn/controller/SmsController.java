@@ -28,4 +28,10 @@ public class SmsController {
         SmsResponse response = smsService.sendSms(request);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping(path = "async", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity sendSmsAsync(@RequestBody SmsRequest request){
+        smsService.senSmsAsync(request);
+        return ResponseEntity.ok().build();
+    }
 }
