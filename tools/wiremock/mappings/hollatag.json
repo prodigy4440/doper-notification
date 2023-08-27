@@ -1,38 +1,50 @@
 {
   "mappings": [
     {
+      "priority": 1,
       "request": {
         "method": "POST",
         "url": "/api/v1/hollatag/send/sms",
         "bodyPatterns": [
           {
-            "matchesJsonPath": "$.phone_number",
-            "matches": "^(?i)200.*"
+            "matchesJsonPath": {
+              "expression": "$.phone_number",
+              "equalTo": "08020000000"
+            }
           }
         ]
       },
       "response": {
         "status": 200,
-        "bodyFileName": "200_hollatag.json",
+        "jsonBody": {
+          "status": "SUCCESS",
+          "message": "Success"
+        },
         "headers": {
           "Content-Type": "application/json"
         }
       }
     },
     {
+      "priority": 10,
       "request": {
         "method": "POST",
         "url": "/api/v1/hollatag/send/sms",
         "bodyPatterns": [
           {
-            "matchesJsonPath": "$.phone_number",
-            "matches": "^(?i)500.*"
+            "matchesJsonPath": {
+              "expression": "$.phone_number",
+              "equalTo": "08030000000"
+            }
           }
         ]
       },
       "response": {
-        "status": 500,
-        "bodyFileName": "500_hollatag.json",
+        "status": 400,
+        "jsonBody": {
+          "status": "FAILED",
+          "message": "Bad request"
+        },
         "headers": {
           "Content-Type": "application/json"
         }
